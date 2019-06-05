@@ -2,7 +2,7 @@
 
 // include "conexao.php";
 
-    $host = "mysql:host=localhost;dbname=desafiophp;charset=utf8mb4;port=3307";
+    $host = "mysql:host=localhost;dbname=sistemapoo;charset=utf8mb4;port=3307";
     $dbUser = "root";
     $dbPass = "";
 

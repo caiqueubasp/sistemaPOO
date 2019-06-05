@@ -8,9 +8,18 @@ class Pessoas{
   private $idade;
   private $cpf;
 
+  function __construct($nome, $idade, $cpf){
+    // parent::__construct($nome,$idade,$cpf);
+    $this->nome = $nome;
+    $this->idade = $idade;
+    $this->cpf = $cpf;
+    
+
+  }
+
     // Criando função para pegar dados
   public function getNome(){
-      return $nome;
+      return $this->nome;
   }
 
 //   criando função para receber dados
@@ -19,7 +28,7 @@ class Pessoas{
   }
 
   public function getIdade(){
-    return $idade;
+    return $this->idade;
 }
 
   public function setIdade($idade){
@@ -27,19 +36,32 @@ class Pessoas{
   }
 
   public function getCpf(){
-    return $cpf;
+    return $this->cpf;
 }
 
 
-  public function setIdade($cpf){
+  public function setCpf($cpf){
     $this->cpf = $cpf;
 }
 
-  public function cadastrarPessoa($con){
-    $this
+  public function cadastrarPessoa($con, $pessoa){
+    try{
+      $query = $con->prepare("INSERT INTO usuarios (nome, idade, cpf) VALUES(?,?,?)");
+      $query->execute([
+        $pessoa->getNome(),
+        $pessoa->getIdade(),
+        $pessoa->getCpf()
+      ]);
+      return $query;
+    }catch(PDOException $e){
+      return false;
+    }
+    }
+    
+
   }
 
 
-}
+
 
 ?>
