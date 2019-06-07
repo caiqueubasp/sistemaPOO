@@ -12,6 +12,7 @@
     </select>
     <input type="text" name="usuario" placeholder="Usuario">
     <input type="password" name="senha" placeholder="Senha">
+    <input type="number" name="salario" placeholder="Salario">
 
 <button type="submit">Enviar</button>
 

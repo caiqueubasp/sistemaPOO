@@ -3,6 +3,7 @@
 require_once "model/Pessoas.php";
 require_once "model/Usuarios.php";
 require_once "model/conexao.php";
+require_once "model/Funcionarios.php";
 
 class PessoasController{
 
@@ -21,11 +22,12 @@ class PessoasController{
             $cpf = $_POST['cpf'];
             $usuario = $_POST['usuario'];
             $senha = password_hash($_POST['senha'],PASSWORD_DEFAULT);
+            $salario = $_POST['salario'];
 
             if($tipoPessoa == "usuario"){
                 $novoUsuario = new Usuarios($nome, $idade, $cpf, $usuario, $senha);
 
-                if ($novoUsuario->cadastrarPessoa($con,$novoUsuario)){
+                if ($novoUsuario->cadastrarPessoa($con,$novoUsuario,$tipoPessoa)){
                     $_REQUEST['pessoa'] = $novoUsuario;
                     require_once "view/sucesso.php";
                 } else {
@@ -36,6 +38,23 @@ class PessoasController{
 
                 // $novoUsuario->setNome($_POST["nome"]);
                 // $novoUsuario->setCpf($_POST['cpf']);
+            }elseif($tipoPessoa == "funcionario"){
+                $novoFuncionario = new Funcionarios(
+                    $nome,
+                    $idade,
+                    $cpf,
+                    $usuario,
+                    $senha,
+                    $salario
+                );
+
+                if($novoFuncionario->cadastrarSalario($con,$novoFuncionario,$tipoPessoa)){
+                    $_REQUEST['pessoa'] = $novoFuncionario;
+
+                    require_once "view/sucesso.php";
+                }else{
+                    echo "Não Foi Cadastrado!";
+                }
             }
 
             // $novaPessoa = new Pessoas();

@@ -44,7 +44,7 @@ class Pessoas{
     $this->cpf = $cpf;
 }
 
-  public function cadastrarPessoa($con, $pessoa){
+  public function cadastrarPessoa($con, $pessoa, $tipoPessoa){
     try{
       $query = $con->prepare("INSERT INTO usuarios (nome, idade, cpf) VALUES(?,?,?)");
       $query->execute([
